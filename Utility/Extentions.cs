@@ -1,6 +1,7 @@
 ﻿using Kingmaker.Blueprints;
 using Kingmaker.Visual.MaterialEffects;
 using System;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -25,6 +26,20 @@ namespace CombatLogOptions.Utility
             material.SetFloat("_UnderlaySoftness", softness);
 
             textMesh.enabled = true;
+        }
+
+        public static void AddRange<TKey, TValue>(this IDictionary<TKey, TValue> baseDictionary,
+            IDictionary<TKey, TValue> dictionaryToAdd)
+        {
+            dictionaryToAdd.ForEach(x => baseDictionary.Add(x.Key, x.Value));
+        }
+
+        public static void ForEach<T>(this IEnumerable<T> source, Action<T> action)
+        {
+            foreach (var item in source)
+            {
+                action(item);
+            }
         }
     }
 }
